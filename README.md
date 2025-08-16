@@ -11,7 +11,7 @@ This project was built as part of the **FullStack Intern Coding Challenge**, imp
 **Backend:** Express.js  
 **Database:** MySQL  
 **Authentication:** JWT-based login system  
-**Styling:** Tailwind CSS / CSS Modules (update based on your choice)  
+**Styling:** Tailwind CSS 
 **HTTP Client:** Axios  
 
 ---
@@ -69,17 +69,24 @@ This project was built as part of the **FullStack Intern Coding Challenge**, imp
 ## 📷 Screenshots
 
 ### Login/Sign-Up
+<img width="1920" height="1080" alt="Vite + React and 2 more pages - Personal - Microsoft​ Edge 16-08-2025 14_40_26" src="https://github.com/user-attachments/assets/28944678-c001-42f7-a48c-04c453d6b8e3" />
+<img width="1920" height="1080" alt="Vite + React and 2 more pages - Personal - Microsoft​ Edge 16-08-2025 14_39_34" src="https://github.com/user-attachments/assets/0fc2f981-824b-4bb1-958e-081963e5c8ff" />
+
+### User Dashboard
+<img width="1920" height="1032" alt="Vite + React and 2 more pages - Personal - Microsoft​ Edge 16-08-2025 14_40_45" src="https://github.com/user-attachments/assets/79ad777b-b530-4ad0-8038-a361f1963ff9" />
+<img width="1920" height="1032" alt="Vite + React and 2 more pages - Personal - Microsoft​ Edge 16-08-2025 14_40_42" src="https://github.com/user-attachments/assets/59e8614a-4b59-4a44-ac3a-ba08c6a7f0b8" />
+<img width="1920" height="1032" alt="Vite + React and 2 more pages - Personal - Microsoft​ Edge 16-08-2025 14_40_38" src="https://github.com/user-attachments/assets/3e1b2b79-544b-442a-9281-e51b7a8f2d7c" />
+
+### Store Owner Dashboard
+<img width="1920" height="1032" alt="Vite + React and 2 more pages - Personal - Microsoft​ Edge 16-08-2025 14_42_01" src="https://github.com/user-attachments/assets/49c8e773-69eb-4559-b70a-1f6a6914639a" />
+<img width="1920" height="1032" alt="Vite + React and 2 more pages - Personal - Microsoft​ Edge 16-08-2025 14_41_52" src="https://github.com/user-attachments/assets/c00f983e-9f12-4647-9ab6-9320d9d6cb19" />
+
 
 ### Admin Dashboard
-![Admin Dashboard](images/admin_dashboard.png)
+<img width="1920" height="1032" alt="Vite + React and 2 more pages - Personal - Microsoft​ Edge 16-08-2025 14_42_37" src="https://github.com/user-attachments/assets/0f07939a-826e-4e3a-9708-5c9339933c56" />
+<img width="1920" height="1032" alt="Vite + React and 2 more pages - Personal - Microsoft​ Edge 16-08-2025 14_42_23" src="https://github.com/user-attachments/assets/f19f9e5c-96a8-4bb9-b403-f8ba003a4acc" />
+<img width="1920" height="1032" alt="Vite + React and 2 more pages - Personal - Microsoft​ Edge 16-08-2025 14_42_14" src="https://github.com/user-attachments/assets/d7c119ae-3a5f-40f5-b068-ef2a5607ef41" />
 
-### Store List
-![Store List](images/store_list.png)
-
-### Rating Submission
-![Rating Submission](images/rating_submission.png)
-
-*(Replace the `images/...` paths with your actual screenshot locations)*
 
 ---
 
@@ -87,16 +94,39 @@ This project was built as part of the **FullStack Intern Coding Challenge**, imp
 
 **Tables:**
 - `users` — Stores user details, roles, and authentication credentials.
+- 
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(60) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    address VARCHAR(400),
+    role ENUM('admin', 'normal', 'store_owner') NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
 - `stores` — Stores information about each registered store.
+CREATE TABLE stores (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(60) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    address VARCHAR(400),
+    owner_id INT,  -- links to users table if store has an owner
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (owner_id) REFERENCES users(id) ON DELETE SET NULL
+);
+
 - `ratings` — Stores user-submitted ratings for stores.
-
-![Database Schema](images/db_schema.png)
-
----
-
-## ⚙️ Installation & Setup
-
-### 1. Clone the repository
-```bash
-git clone https://github.com/yourusername/Store-rating-app.git
-cd Store-rating-app
+CREATE TABLE ratings (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    store_id INT NOT NULL,
+    rating INT CHECK(rating BETWEEN 1 AND 5),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE(user_id, store_id), -- ensures one rating per user per store
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (store_id) REFERENCES stores(id) ON DELETE CASCADE
+);
