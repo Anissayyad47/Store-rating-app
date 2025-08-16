@@ -96,16 +96,16 @@ This project was built as part of the **FullStack Intern Coding Challenge**, imp
 **Tables:**
 - `users` — Stores user details, roles, and authentication credentials.
 - 
-CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(60) NOT NULL,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    address VARCHAR(400),
-    role ENUM('admin', 'normal', 'store_owner') NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
+-CREATE TABLE users (
+    -id INT AUTO_INCREMENT PRIMARY KEY,
+    -name VARCHAR(60) NOT NULL,
+    -email VARCHAR(100) NOT NULL UNIQUE,
+    -password VARCHAR(255) NOT NULL,
+    -address VARCHAR(400),
+    -role ENUM('admin', 'normal', 'store_owner') NOT NULL,
+    -created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    -updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+-);
 
 - `stores` — Stores information about each registered store.
 CREATE TABLE stores (
