@@ -74,6 +74,7 @@ This project was built as part of the **FullStack Intern Coding Challenge**, imp
 
 ### User Dashboard
 <img width="1920" height="1032" alt="Vite + React and 2 more pages - Personal - Microsoft​ Edge 16-08-2025 14_40_38" src="https://github.com/user-attachments/assets/3e1b2b79-544b-442a-9281-e51b7a8f2d7c" />
+Search Store by name
 <img width="1920" height="1032" alt="Vite + React and 2 more pages - Personal - Microsoft​ Edge 16-08-2025 14_40_42" src="https://github.com/user-attachments/assets/59e8614a-4b59-4a44-ac3a-ba08c6a7f0b8" />
 <img width="1920" height="1032" alt="Vite + React and 2 more pages - Personal - Microsoft​ Edge 16-08-2025 14_40_45" src="https://github.com/user-attachments/assets/79ad777b-b530-4ad0-8038-a361f1963ff9" />
 
